@@ -2,44 +2,29 @@
 
 namespace App\Livewire\User;
 
+use App\Models\User;
 use Livewire\Component;
 
 class UserList extends Component
 {
-    public string $name = 'Dariia';
-    public string $lastname;
-    public string $fullname;
+    public string $name;
+    public string $email;
+    public string $password;
 
-    public string $title;
-
-    public string $secondTitle;
-
-    public array $users = [
-        'User1',
-        'User2',
-        'User3',
-    ];
-
-    public string $user;
-
-
-    public function mount($lastname = 'Sliusar')
+    public function addUser()
     {
-        $this->lastname = $lastname;
-        $this->fullname = $this->name . ' ' . $this->lastname;
-    }
-
-    public function add()
-    {
-        $this->users[] = $this->user;
-        $this->reset('user');
-//        $this->users[] = $this->pull('user');
+        User::create([
+            'name' => $this->name,
+            'email' => $this->email,
+            'password' => bcrypt($this->password),
+        ]);
+        $this->reset('name', 'email', 'password');
     }
 
     public function render()
     {
         return view('livewire.user.user-list', [
-            'age' => 29
-        ])->with(['dog' => 'Rex', 'cat' => 'Murka']);
+            'users' => User::all(),
+        ]);
     }
 }

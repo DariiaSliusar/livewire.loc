@@ -28,13 +28,8 @@
 
 <div class="container my-5">
 
-    @php
-        $title = 'Hello World';
-        $secondTitle = 'Hello Sliusar';
-    @endphp
+    <livewire:user.user-list />
 
-{{--    <livewire:user.user-list lastname="Sliusar" :title="$title" :$secondTitle/>--}}
-@livewire('user.user-list', ['lastname' => 'Sliusar', 'title' => $title, 'secondTitle' => $secondTitle])
 </div>
 
 
