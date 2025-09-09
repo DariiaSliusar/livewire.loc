@@ -21,6 +21,11 @@ class UserList extends Component
         $this->reset('name', 'email', 'password');
     }
 
+    public function deleteUser($id)
+    {
+        User::query()->find($id)->delete();
+    }
+
     public function render()
     {
         return view('livewire.user.user-list', [
