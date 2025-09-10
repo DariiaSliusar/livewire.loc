@@ -29,6 +29,9 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Add User</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#" data-fancybox data-src="#dialog-content">Add User2</a>
+                </li>
             </ul>
         </div>
     </div>
@@ -38,11 +41,14 @@
 
     <div class="row">
         <div class="col-md-4">
+            <div id="dialog-content" style="display:none;">
+                <livewire:user.user-create />
+            </div>
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Launch demo modal
-            </button>
-            <!-- Modal -->
+{{--            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">--}}
+{{--                Launch demo modal--}}
+{{--            </button>--}}
+{{--            <!-- Modal -->--}}
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -62,7 +68,10 @@
             </div>
         </div>
 
-        <livewire:user.user-list />
+        <div class="col-md-12">
+            <livewire:user.user-list />
+        </div>
+
     </div>
 
 </div>
