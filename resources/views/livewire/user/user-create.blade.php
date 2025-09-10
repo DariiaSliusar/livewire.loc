@@ -23,6 +23,16 @@
                 @error('form.password') <div class="invalid-feedback">{{ $message }}</div> @enderror
             </div>
 
+            <div class="mb-3">
+                <select class="form-select select2 @error('form.country_id') is-invalid @enderror" wire:model="country_id">
+                    <option selected>Select country</option>
+                    @foreach($countries as $country)
+                        <option value="{{ $country->id }}">{{ $country->name }}</option>
+                    @endforeach
+                </select>
+                @error('form.country_id') <div class="invalid-feedback">{{ $message }}</div> @enderror
+            </div>
+
             <div class="d-flex align-items-center gap-3">
                 <button type="submit" class="btn btn-primary my-2">Add User</button>
                 <div wire:loading wire:target="save" class="spinner-border" role="status">
@@ -33,3 +43,17 @@
         </form>
 
 </div>
+
+@script
+<script>
+    $(document).ready(function() {
+        let select2 = $('.select2');
+        select2.select2();
+        select2.on('change', function(e){
+            console.log($(this).val());
+            $wire.form.country_id = $(this).val();
+            // $wire.set('form.country_id', $(this).val(), false);
+        });
+    });
+</script>
+@endscript
