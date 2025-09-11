@@ -24,13 +24,16 @@
             </div>
 
             <div class="mb-3">
-                <select class="form-select select2 @error('form.country_id') is-invalid @enderror" wire:model="country_id">
-                    <option selected>Select country</option>
-                    @foreach($countries as $country)
-                        <option value="{{ $country->id }}">{{ $country->name }}</option>
-                    @endforeach
-                </select>
-                @error('form.country_id') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                <div wire:ignore>
+                    <select class="form-select select2 @error('form.country_id') is-invalid @enderror" wire:model="country_id">
+                        <option selected>Select country</option>
+                        @foreach($countries as $country)
+                            <option value="{{ $country->id }}">{{ $country->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                @error('form.country_id') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
             </div>
 
             <div class="d-flex align-items-center gap-3">
@@ -50,9 +53,11 @@
         let select2 = $('.select2');
         select2.select2();
         select2.on('change', function(e){
-            console.log($(this).val());
             $wire.form.country_id = $(this).val();
             // $wire.set('form.country_id', $(this).val(), false);
+        });
+        $wire.on('user-created', () => {
+            select2.val('Select country').trigger('change');
         });
     });
 </script>

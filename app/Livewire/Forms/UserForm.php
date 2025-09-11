@@ -17,7 +17,7 @@ class UserForm extends Form
 //    #[Validate('required|min:6')]
     public string $password = '';
 
-    public string $country_id;
+    public string $country_id = '';
 
     protected function rules(): array
     {
