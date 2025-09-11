@@ -19,6 +19,9 @@ class UserForm extends Form
 
     public string $country_id = '';
 
+    #[Validate('nullable|image|extensions:jpg,jpeg,png|max:1024')]
+    public $avatar;
+
     protected function rules(): array
     {
         return [

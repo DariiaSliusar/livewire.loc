@@ -36,6 +36,11 @@
                 @error('form.country_id') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
             </div>
 
+            <div class="mb-3">
+                <input type="file" class="form-control @error('form.avatar') is-invalid @enderror" wire:model="form.avatar">
+                @error('form.avatar') <div class="invalid-feedback">{{ $message }}</div> @enderror
+            </div>
+
             <div class="d-flex align-items-center gap-3">
                 <button type="submit" class="btn btn-primary my-2">Add User</button>
                 <div wire:loading wire:target="save" class="spinner-border" role="status">
