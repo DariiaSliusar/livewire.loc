@@ -38,7 +38,16 @@
 
             <div class="mb-3">
                 <input type="file" class="form-control @error('form.avatar') is-invalid @enderror" wire:model="form.avatar">
+
                 @error('form.avatar') <div class="invalid-feedback">{{ $message }}</div> @enderror
+
+                <div wire:loading wire:target="form.avatar">
+                    <span class="text-success">Uploading...</span>
+                </div>
+
+                @if (!$errors->has('form.avatar') && $form->avatar)
+                    <img src="{{ $form->avatar->temporaryUrl() }}" alt="" width="100">
+                @endif
             </div>
 
             <div class="d-flex align-items-center gap-3">

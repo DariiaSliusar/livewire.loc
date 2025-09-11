@@ -36,6 +36,11 @@ class UserForm extends Form
     {
         $validated = $this->validate();
 
+        if ($this->avatar) {
+            $folders = date('Y') . '/' . date('m') . '/' . date('d');
+            $validated['avatar'] = $this->avatar->store($folders);
+        }
+
         $user = User::create($validated);
 
         $this->reset();

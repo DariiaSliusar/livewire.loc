@@ -6,6 +6,9 @@
                 <a href="#" wire:click.prevent="delete({{ $user->id }})" wire:confirm="Are you sure?">
                     Delete
                 </a>
+                @if($user->avatar)
+                    | <img src="{{ asset("uploads/$user->avatar") }}" alt="" width="50">
+                @endif
             </li>
         @empty
             <p>User list is empty....</p>
