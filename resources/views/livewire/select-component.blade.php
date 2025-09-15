@@ -1,12 +1,21 @@
-<div class="mb-3">
-    <div>
-        <select id="country" class="form-select @error('form.country_id') is-invalid @enderror" wire:model.live="form.country_id">
-            <option value="" selected>Select country</option>
-            @foreach($countries as $country)
-                <option value="{{ $country->id }}" wire:key="{{ $country->id }}">{{ $country->name }}</option>
-            @endforeach
-        </select>
-    </div>
+<div class="mb-3" wire:ignore>
+    <select id="{{ $name }}" class="form-select @error('value') is-invalid @enderror" wire:model.live="value">
+        <option value="" selected>Select {{ $name }}</option>
+        @foreach($items as $item)
+            <option value="{{ $item->id }}" wire:key="{{ $item->id }}">{{ $item->name }}</option>
+        @endforeach
+    </select>
 
-    @error('form.country_id') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
+    @error('value') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
 </div>
+
+@script
+<script>
+
+    $(function () {
+        $('#{{ $name }}').select2().on('change', function () {
+            $wire.$set('value', $(this).val());
+        });
+    })
+</script>
+@endscript
